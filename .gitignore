@@ -29,9 +29,6 @@ Thumbs.db
 *.tmp
 *.bak
 
-# Entity Framework Migrations
-Migrations/*Designer.cs
-
 # Others
 *.swp
 *.swn
