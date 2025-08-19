@@ -1,0 +1,25 @@
+@use "@/style/variables" as *;
+
+.vacancy-form {
+  display: grid;
+  gap: $space-4;
+}
+.field {
+  display: grid;
+  gap: $space-2;
+
+  input,
+  textarea,
+  select {
+    padding: $space-2 $space-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+  }
+}
+.actions {
+  display: flex;
+}
+.error {
+  color: $color-text-error;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,69 @@
+@use "./variables" as *;
+
+@use "./form";
+
+/* Global styles */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
+    sans-serif;
+  color: #111827;
+  background: #f9fafb;
+}
+
+.app {
+  padding: $space-4;
+}
+
+/* Component-level classes */
+.company-list {
+  padding: $space-4;
+
+  &__header {
+    margin-bottom: $space-4;
+  }
+
+  .companies {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: $space-4;
+
+    .company {
+      border: 1px solid $color-border;
+      border-radius: $radius-md;
+      padding: $space-3 $space-4;
+      background: $color-bg;
+
+      &__name {
+        margin: 0 0 $space-2 0;
+        font-size: 1.05rem;
+      }
+
+      .vacancies {
+        list-style: disc;
+        margin: 0 0 0 $space-4;
+        padding: 0;
+
+        .vacancy {
+          margin: $space-1 0;
+        }
+      }
+    }
+  }
+
+  .state {
+    color: $color-text-muted;
+  }
+  .state--error {
+    color: $color-text-error;
+  }
+}

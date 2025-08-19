@@ -1,0 +1,23 @@
+{
+  "runtime": "Net90",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "https://localhost:5001/swagger/v1/swagger.json"
+    }
+  },
+  "codeGenerators": {
+    "openApiToTypeScriptClient": {
+      "className": "GameApiClient",
+      "template": "Fetch",
+      "output": "./src/types/generated-api.ts",
+      "generateClientClasses": false,
+      "generateClientInterfaces": false,
+      "generateDtoTypes": true,
+      "typeStyle": "Interface",
+      "dateTimeType": "Date",
+      "generateConstructorInterface": false,
+      "generateOptionalParameters": true,
+      "operationGenerationMode": "SingleClientFromPathSegments"
+    }
+  }
+}

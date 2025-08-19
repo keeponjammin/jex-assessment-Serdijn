@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>jex_assessment</RootNamespace>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <SpaDist>wwwroot\dist\</SpaDist>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <!-- Ensure Node.js is available -->
+  <Target Name="CheckForNpm" BeforeTargets="Build">
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="NodeExitCode" />
+    </Exec>
+    <Error
+      Condition="'$(NodeExitCode)' != '0'"
+      Text="Node.js is required to build the Vue frontend. Please install Node.js from https://nodejs.org/"
+    />
+  </Target>
+  <!-- Install npm dependencies if missing -->
+  <Target
+    Name="NpmInstall"
+    BeforeTargets="Build"
+    Condition="!Exists('$(SpaRoot)node_modules')"
+    DependsOnTargets="CheckForNpm"
+  >
+    <Message Text="Installing npm packages (ClientApp)..." Importance="high" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+  <!-- Build Vue frontend -->
+  <Target Name="BuildVueFrontend" BeforeTargets="Build" DependsOnTargets="NpmInstall">
+    <Message Text="Building Vue frontend (ClientApp)..." Importance="high" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+  </Target>
+  <!-- Clean Vue build artifacts -->
+  <Target Name="CleanVueFrontend" BeforeTargets="Clean">
+    <Message Text="Cleaning Vue build artifacts..." Importance="high" />
+    <RemoveDir Directories="$(SpaDist)" />
+  </Target>
+</Project>
